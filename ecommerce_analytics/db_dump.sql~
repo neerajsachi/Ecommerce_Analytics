@@ -1,0 +1,591 @@
+-- MySQL dump 10.13  Distrib 8.0.39, for Linux (x86_64)
+--
+-- Host: localhost    Database: ecommerce
+-- ------------------------------------------------------
+-- Server version	8.0.39-0ubuntu0.22.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_group` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `group_id` int NOT NULL,
+  `permission_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_permission` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add category',7,'add_category'),(26,'Can change category',7,'change_category'),(27,'Can delete category',7,'delete_category'),(28,'Can view category',7,'view_category'),(29,'Can add customer',8,'add_customer'),(30,'Can change customer',8,'change_customer'),(31,'Can delete customer',8,'delete_customer'),(32,'Can view customer',8,'view_customer'),(33,'Can add tag',9,'add_tag'),(34,'Can change tag',9,'change_tag'),(35,'Can delete tag',9,'delete_tag'),(36,'Can view tag',9,'view_tag'),(37,'Can add order',10,'add_order'),(38,'Can change order',10,'change_order'),(39,'Can delete order',10,'delete_order'),(40,'Can view order',10,'view_order'),(41,'Can add product',11,'add_product'),(42,'Can change product',11,'change_product'),(43,'Can delete product',11,'delete_product'),(44,'Can view product',11,'view_product'),(45,'Can add order item',12,'add_orderitem'),(46,'Can change order item',12,'change_orderitem'),(47,'Can delete order item',12,'delete_orderitem'),(48,'Can view order item',12,'view_orderitem'),(49,'Can add inventory',13,'add_inventory'),(50,'Can change inventory',13,'change_inventory'),(51,'Can delete inventory',13,'delete_inventory'),(52,'Can view inventory',13,'view_inventory'),(53,'Can add tag',14,'add_tag'),(54,'Can change tag',14,'change_tag'),(55,'Can delete tag',14,'delete_tag'),(56,'Can view tag',14,'view_tag'),(57,'Can add tagged item',15,'add_taggeditem'),(58,'Can change tagged item',15,'change_taggeditem'),(59,'Can delete tagged item',15,'delete_taggeditem'),(60,'Can view tagged item',15,'view_taggeditem');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$870000$vAA2OCKgrYux3zxISgxXrn$Z5nI9QkfenqZ4RLVfmslHM8mABNfdcXKNHZWdW+s8os=','2024-10-14 05:00:27.923163',1,'Neeraj','','','rejunrj@gmail.com',1,1,'2024-10-14 05:00:11.634685');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_user_groups` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `group_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `permission_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_admin_log` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_content_type` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(7,'ecommerce','category'),(8,'ecommerce','customer'),(13,'ecommerce','inventory'),(10,'ecommerce','order'),(12,'ecommerce','orderitem'),(11,'ecommerce','product'),(9,'ecommerce','tag'),(6,'sessions','session'),(14,'taggit','tag'),(15,'taggit','taggeditem');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_migrations` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2024-10-14 04:19:50.170248'),(2,'auth','0001_initial','2024-10-14 04:19:50.614284'),(3,'admin','0001_initial','2024-10-14 04:19:50.715323'),(4,'admin','0002_logentry_remove_auto_add','2024-10-14 04:19:50.721730'),(5,'admin','0003_logentry_add_action_flag_choices','2024-10-14 04:19:50.731413'),(6,'contenttypes','0002_remove_content_type_name','2024-10-14 04:19:50.789931'),(7,'auth','0002_alter_permission_name_max_length','2024-10-14 04:19:50.835542'),(8,'auth','0003_alter_user_email_max_length','2024-10-14 04:19:50.854504'),(9,'auth','0004_alter_user_username_opts','2024-10-14 04:19:50.863152'),(10,'auth','0005_alter_user_last_login_null','2024-10-14 04:19:50.904667'),(11,'auth','0006_require_contenttypes_0002','2024-10-14 04:19:50.907020'),(12,'auth','0007_alter_validators_add_error_messages','2024-10-14 04:19:50.914267'),(13,'auth','0008_alter_user_username_max_length','2024-10-14 04:19:50.961783'),(14,'auth','0009_alter_user_last_name_max_length','2024-10-14 04:19:51.011290'),(15,'auth','0010_alter_group_name_max_length','2024-10-14 04:19:51.026495'),(16,'auth','0011_update_proxy_permissions','2024-10-14 04:19:51.033762'),(17,'auth','0012_alter_user_first_name_max_length','2024-10-14 04:19:51.085837'),(18,'taggit','0001_initial','2024-10-14 04:19:51.238033'),(19,'taggit','0002_auto_20150616_2121','2024-10-14 04:19:51.256428'),(20,'taggit','0003_taggeditem_add_unique_index','2024-10-14 04:19:51.273567'),(21,'taggit','0004_alter_taggeditem_content_type_alter_taggeditem_tag','2024-10-14 04:19:51.287938'),(22,'taggit','0005_auto_20220424_2025','2024-10-14 04:19:51.292542'),(23,'taggit','0006_rename_taggeditem_content_type_object_id_taggit_tagg_content_8fc721_idx','2024-10-14 04:19:51.316473'),(24,'ecommerce','0001_initial','2024-10-14 04:19:51.715008'),(25,'sessions','0001_initial','2024-10-14 04:57:43.507130'),(26,'ecommerce','0002_alter_product_managers_alter_customer_name_and_more','2024-10-14 05:11:36.866941'),(27,'ecommerce','0003_alter_product_price','2024-10-14 12:02:23.360787');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('d3v0kktom3ljswmw04asun49gneb8iee','.eJxVjMsOwiAQRf-FtSEMDAgu3fcbyPCSqoGktCvjv2uTLnR7zzn3xTxta_XbyIufE7swYKffLVB85LaDdKd26zz2ti5z4LvCDzr41FN-Xg_376DSqN86CCOD0QnRyUJOo1a5YJHKqoQSckQQtpCGCGdE0CQClehCVmBMQcveH8wkN2Y:1t0DBz:YnY8capFjgUpx73S3dDWl4btwWtTVVb1lwzLNGnLEB8','2024-10-28 05:00:27.926384');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_category`
+--
+
+DROP TABLE IF EXISTS `ecommerce_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_category` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_category`
+--
+
+LOCK TABLES `ecommerce_category` WRITE;
+/*!40000 ALTER TABLE `ecommerce_category` DISABLE KEYS */;
+INSERT INTO `ecommerce_category` VALUES (1,'Electronics'),(2,'Clothing'),(3,'Home Appliances'),(4,'Toys'),(5,'Automobiles'),(6,'Stationary');
+/*!40000 ALTER TABLE `ecommerce_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_customer`
+--
+
+DROP TABLE IF EXISTS `ecommerce_customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_customer` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `registration_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_customer`
+--
+
+LOCK TABLES `ecommerce_customer` WRITE;
+/*!40000 ALTER TABLE `ecommerce_customer` DISABLE KEYS */;
+INSERT INTO `ecommerce_customer` VALUES (1,'Ritesh','bengali@gmail.com','India','2024-10-12 00:00:00.000000'),(2,'John','john@example.com','US','2024-06-15 00:00:00.000000'),(3,'Jane','jane@example.com','UK','2024-06-14 00:00:00.000000'),(4,'Neeraj','reju@gmail.com','India','2023-01-01 00:00:00.000000'),(5,'Dowin','dow@gmail.com','India','2022-09-06 00:00:00.000000'),(6,'Abishek','auti@gmail.com','India','2024-08-12 00:00:00.000000'),(7,'Vidhun','gy@gmail.com','Russia','2024-03-03 00:00:00.000000');
+/*!40000 ALTER TABLE `ecommerce_customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_inventory`
+--
+
+DROP TABLE IF EXISTS `ecommerce_inventory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_inventory` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `quantity` int unsigned NOT NULL,
+  `last_restocked_date` datetime(6) NOT NULL,
+  `product_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `product_id` (`product_id`),
+  CONSTRAINT `ecommerce_inventory_product_id_c083827a_fk_ecommerce_product_id` FOREIGN KEY (`product_id`) REFERENCES `ecommerce_product` (`id`),
+  CONSTRAINT `ecommerce_inventory_chk_1` CHECK ((`quantity` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_inventory`
+--
+
+LOCK TABLES `ecommerce_inventory` WRITE;
+/*!40000 ALTER TABLE `ecommerce_inventory` DISABLE KEYS */;
+INSERT INTO `ecommerce_inventory` VALUES (1,5,'2024-07-18 00:00:00.000000',1),(2,20,'2024-08-18 00:00:00.000000',2),(3,15,'2024-07-18 00:00:00.000000',3),(4,100,'2023-09-07 00:00:00.000000',4),(5,50,'2024-10-15 00:00:00.000000',5),(6,50,'2022-09-09 00:00:00.000000',6);
+/*!40000 ALTER TABLE `ecommerce_inventory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_order`
+--
+
+DROP TABLE IF EXISTS `ecommerce_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_order` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `order_date` datetime(6) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `customer_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ecommerce_order_customer_id_40daaaca_fk_ecommerce_customer_id` (`customer_id`),
+  CONSTRAINT `ecommerce_order_customer_id_40daaaca_fk_ecommerce_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `ecommerce_customer` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_order`
+--
+
+LOCK TABLES `ecommerce_order` WRITE;
+/*!40000 ALTER TABLE `ecommerce_order` DISABLE KEYS */;
+INSERT INTO `ecommerce_order` VALUES (1,'2024-10-12 00:00:00.000000','PENDING',720.00,2),(2,'2024-10-12 00:00:00.000000','PENDING',20.00,3),(3,'2024-09-11 00:00:00.000000','DELIVERED',700.00,1),(4,'2023-01-03 00:00:00.000000','DELIVERED',1400.00,4),(5,'2024-09-09 00:00:00.000000','DELIVERED',8000000.00,4),(6,'2024-08-07 00:00:00.000000','DELIVERED',100.00,5),(7,'2023-10-10 00:00:00.000000','PEDNING',1000.00,6),(8,'2023-10-10 00:00:00.000000','DELIVERED',100.00,7);
+/*!40000 ALTER TABLE `ecommerce_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_orderitem`
+--
+
+DROP TABLE IF EXISTS `ecommerce_orderitem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_orderitem` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `quantity` int unsigned NOT NULL,
+  `price_at_time_of_order` decimal(10,2) NOT NULL,
+  `order_id` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ecommerce_orderitem_order_id_626b0534_fk_ecommerce_order_id` (`order_id`),
+  KEY `ecommerce_orderitem_product_id_c2e62996_fk_ecommerce_product_id` (`product_id`),
+  CONSTRAINT `ecommerce_orderitem_order_id_626b0534_fk_ecommerce_order_id` FOREIGN KEY (`order_id`) REFERENCES `ecommerce_order` (`id`),
+  CONSTRAINT `ecommerce_orderitem_product_id_c2e62996_fk_ecommerce_product_id` FOREIGN KEY (`product_id`) REFERENCES `ecommerce_product` (`id`),
+  CONSTRAINT `ecommerce_orderitem_chk_1` CHECK ((`quantity` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_orderitem`
+--
+
+LOCK TABLES `ecommerce_orderitem` WRITE;
+/*!40000 ALTER TABLE `ecommerce_orderitem` DISABLE KEYS */;
+INSERT INTO `ecommerce_orderitem` VALUES (1,1,700.00,1,1),(2,1,20.00,1,2),(3,1,20.00,2,2),(4,1,700.00,3,1),(5,2,700.00,4,1),(6,2,60.00,6,10),(7,4,40.00,6,11),(8,1,8000000.00,5,9),(9,1,1000.00,7,5),(10,1,100.00,8,12);
+/*!40000 ALTER TABLE `ecommerce_orderitem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_product`
+--
+
+DROP TABLE IF EXISTS `ecommerce_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_product` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` longtext NOT NULL,
+  `SKU` varchar(100) NOT NULL,
+  `price` decimal(20,2) NOT NULL,
+  `category_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `SKU` (`SKU`),
+  KEY `ecommerce_product_category_id_53003707_fk_ecommerce_category_id` (`category_id`),
+  CONSTRAINT `ecommerce_product_category_id_53003707_fk_ecommerce_category_id` FOREIGN KEY (`category_id`) REFERENCES `ecommerce_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_product`
+--
+
+LOCK TABLES `ecommerce_product` WRITE;
+/*!40000 ALTER TABLE `ecommerce_product` DISABLE KEYS */;
+INSERT INTO `ecommerce_product` VALUES (1,'Smartphone','Latest model smartphone with advanced features','SP123',500.00,1),(2,'T-Shirt','Comfortable cotton t-shirt available in various sizes','TS456',20.00,2),(3,'Microwave Oven','Compact microwave oven with multiple settings','MO789',100.00,3),(4,'Nothing phone','Nothing phone 2a','SM234',1000.00,1),(5,'Jeans','Comfy jeans','JNS331',1000.00,2),(6,'Mixer','for grinding','MIX345',5000.00,3),(7,'Hyundai Verna','Verna','VER233',1500000.00,5),(8,'Maruthi WagonR','WagonR','WGR234',800000.00,5),(9,'Toyotta Supra','Its a its a supraaa','SUP292',8000000.00,5),(10,'Book','NoteBook','BOK344',30.00,6),(11,'Pen','Lexi pen','LEX891',10.00,6),(12,'Hotwheels car','Vroom vroom','HOT69',100.00,4);
+/*!40000 ALTER TABLE `ecommerce_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_product_tags`
+--
+
+DROP TABLE IF EXISTS `ecommerce_product_tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_product_tags` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `product_id` bigint NOT NULL,
+  `tag_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ecommerce_product_tags_product_id_tag_id_c377b221_uniq` (`product_id`,`tag_id`),
+  KEY `ecommerce_product_tags_tag_id_d488483f_fk_ecommerce_tag_id` (`tag_id`),
+  CONSTRAINT `ecommerce_product_ta_product_id_b13d454c_fk_ecommerce` FOREIGN KEY (`product_id`) REFERENCES `ecommerce_product` (`id`),
+  CONSTRAINT `ecommerce_product_tags_tag_id_d488483f_fk_ecommerce_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `ecommerce_tag` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_product_tags`
+--
+
+LOCK TABLES `ecommerce_product_tags` WRITE;
+/*!40000 ALTER TABLE `ecommerce_product_tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ecommerce_product_tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ecommerce_tag`
+--
+
+DROP TABLE IF EXISTS `ecommerce_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ecommerce_tag` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ecommerce_tag`
+--
+
+LOCK TABLES `ecommerce_tag` WRITE;
+/*!40000 ALTER TABLE `ecommerce_tag` DISABLE KEYS */;
+INSERT INTO `ecommerce_tag` VALUES (1,'New'),(2,'Sale'),(3,'Popular'),(4,'Trending');
+/*!40000 ALTER TABLE `ecommerce_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `taggit_tag`
+--
+
+DROP TABLE IF EXISTS `taggit_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `taggit_tag` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `taggit_tag`
+--
+
+LOCK TABLES `taggit_tag` WRITE;
+/*!40000 ALTER TABLE `taggit_tag` DISABLE KEYS */;
+/*!40000 ALTER TABLE `taggit_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `taggit_taggeditem`
+--
+
+DROP TABLE IF EXISTS `taggit_taggeditem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `taggit_taggeditem` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `object_id` int NOT NULL,
+  `content_type_id` int NOT NULL,
+  `tag_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq` (`content_type_id`,`object_id`,`tag_id`),
+  KEY `taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id` (`tag_id`),
+  KEY `taggit_taggeditem_object_id_e2d7d1df` (`object_id`),
+  KEY `taggit_tagg_content_8fc721_idx` (`content_type_id`,`object_id`),
+  CONSTRAINT `taggit_taggeditem_content_type_id_9957a03c_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `taggit_tag` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `taggit_taggeditem`
+--
+
+LOCK TABLES `taggit_taggeditem` WRITE;
+/*!40000 ALTER TABLE `taggit_taggeditem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `taggit_taggeditem` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-10-15 18:08:00
