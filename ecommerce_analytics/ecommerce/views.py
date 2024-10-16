@@ -8,7 +8,7 @@ from .serializers import InventorySerializer, CustomerSerializer, ProductSeriali
 from datetime import datetime
 
 class SalesDataView(APIView):
-    permission= [IsAuthenticated]
+    permission_classes= [IsAuthenticated]
 
     def get(self, request):
         print("hi")
@@ -24,7 +24,7 @@ class SalesDataView(APIView):
         return Response(revenue_by_category)
 
 class InventoryUpdateView(APIView):
-    permission= [IsAuthenticated]
+    permission_classes= [IsAuthenticated]
 
     def post(self, request, pk):
         print("hi")
@@ -60,7 +60,7 @@ class ExportSalesReportView(APIView):
         return response
 
 class CustomerInfoView(APIView):
-    permission= [IsAuthenticated]
+    permission_classes= [IsAuthenticated]
     def get(self, request, pk):
         try:
             customer = Customer.objects.get(pk=pk)
