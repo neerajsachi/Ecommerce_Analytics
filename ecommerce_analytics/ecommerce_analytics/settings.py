@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'ecommerce',
     'rest_framework',
     'rest_framework_simplejwt',
-    'taggit',
     'drf_yasg',
 ]
 
