@@ -55,8 +55,13 @@ class ExportSalesReportView(APIView):
     #permission_classes = [IsAuthenticated]
     # Handles GET requests to generate a sales report and export it as an Excel file
     def get(self, request):
-        sales_analytics = SalesAnalytics(datetime.now().replace(day=1), datetime.now())
+        start_date = request.query_params.get('start_date')
+        end_date = request.query_params.get('end_date')
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+        sales_analytics = SalesAnalytics(start_date, end_date)
         report_data = sales_analytics.calculate_revenue_by_category()
+        print(report_data)
         # Create an Excel workbook and populate it with sales data
         wb = Workbook()
         ws = wb.active
